@@ -17,8 +17,8 @@ export default function EdgeCaseCard({ edgeCase }: { edgeCase: EdgeCase }) {
         {edgeCase.description}
       </p>
 
-      <div className="mt-4 rounded-lg border-l-4 border-indigo-200 bg-indigo-50/50 p-3">
-        <h4 className="text-xs font-semibold tracking-wide text-indigo-700 uppercase">
+      <div className="mt-4 rounded-lg border-l-4 border-blue-300 bg-blue-50/50 p-3">
+        <h4 className="text-xs font-semibold tracking-wide text-blue-800 uppercase">
           Why it matters
         </h4>
         <p className="mt-1 text-sm leading-6 text-slate-700">

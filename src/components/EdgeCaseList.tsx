@@ -1,4 +1,4 @@
-import type { EdgeCase } from "@/types/edgeCase";
+import { SEVERITY_LEVELS, type EdgeCase } from "@/types/edgeCase";
 import EdgeCaseCard from "@/components/EdgeCaseCard";
 
 export default function EdgeCaseList({
@@ -6,9 +6,15 @@ export default function EdgeCaseList({
 }: {
   edgeCases: EdgeCase[];
 }) {
+  // Most severe first: Critical, High, Medium, Low.
+  const sortedEdgeCases = [...edgeCases].sort(
+    (a, b) =>
+      SEVERITY_LEVELS.indexOf(a.severity) - SEVERITY_LEVELS.indexOf(b.severity),
+  );
+
   return (
     <ul className="flex flex-col gap-5">
-      {edgeCases.map((edgeCase) => (
+      {sortedEdgeCases.map((edgeCase) => (
         <li key={edgeCase.title}>
           <EdgeCaseCard edgeCase={edgeCase} />
         </li>
