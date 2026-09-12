@@ -7,27 +7,26 @@ import LoadingState from "@/components/LoadingState";
 import ErrorMessage from "@/components/ErrorMessage";
 import TechBuddy from "@/components/TechBuddy";
 import { loadResult, saveResult } from "@/lib/resultStorage";
+import { MIN_FEATURE_LENGTH, MAX_FEATURE_LENGTH } from "@/lib/config/validation";
 
-const WHAT_IT_DOES = [
+const HOW_IT_WORKS = [
   {
+    step: "01",
     icon: "📝",
-    title: "Describe your feature",
+    title: "Describe",
     body: "Paste a feature description, user story, or rough spec — plain English is enough.",
   },
   {
-    icon: "🧠",
-    title: "A local AI reviews it",
-    body: "A model running on your own machine looks for what your happy path might miss.",
+    step: "02",
+    icon: "⚡",
+    title: "Generate",
+    body: "A local AI model reviews it and looks for what your happy path might miss.",
   },
   {
-    icon: "🗂️",
-    title: "Categorized & prioritized",
-    body: "Every result is tagged with a category and a severity, from Low to Critical.",
-  },
-  {
-    icon: "💡",
-    title: "Explained, not just listed",
-    body: "Each edge case includes a plain-English \"why it matters\" note, not just a title.",
+    step: "03",
+    icon: "✅",
+    title: "Review",
+    body: "Get categorized, severity-ranked edge cases, each with a clear reason why it matters.",
   },
 ];
 
@@ -48,9 +47,28 @@ export default function Home() {
     }
   }, []);
 
+  function scrollToInput() {
+    document
+      .getElementById("feature-input")
+      ?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
   async function handleGenerate() {
-    setIsLoading(true);
     setError(null);
+
+    const trimmed = feature.trim();
+    if (trimmed.length === 0 || trimmed.length < MIN_FEATURE_LENGTH) {
+      setError("Please describe the feature in a little more detail.");
+      return;
+    }
+    if (feature.length > MAX_FEATURE_LENGTH) {
+      setError(
+        "Please shorten the feature description before generating edge cases.",
+      );
+      return;
+    }
+
+    setIsLoading(true);
 
     try {
       const response = await fetch("/api/generate", {
@@ -80,74 +98,134 @@ export default function Home() {
     }
   }
 
+  const overLimit = feature.length > MAX_FEATURE_LENGTH;
+
   return (
     <>
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-2xl px-4 py-10 text-center sm:px-6 sm:text-left">
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Edge Case <span className="text-blue-700">Generator</span>
-          </h1>
-          <p className="mt-3 text-lg text-slate-700">
-            Find the edge cases your happy path missed.
-          </p>
-          <p className="mt-1 text-sm text-slate-500">
-            Describe a software feature and get structured, prioritized edge
-            cases before you start building.
-          </p>
+      <header className="fixed top-4 left-1/2 z-50 w-[90%] max-w-7xl -translate-x-1/2 rounded-2xl border border-white/10 bg-zinc-900/80 px-6 py-3 backdrop-blur-md">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <span className="accent-gradient flex h-7 w-7 items-center justify-center rounded-lg">
+              <svg
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="white"
+                strokeWidth="1.8"
+                className="h-4 w-4"
+                aria-hidden="true"
+              >
+                <path
+                  d="M10 2 2 16h16L10 2Z"
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                />
+                <path d="M10 8v3.5" strokeLinecap="round" />
+                <circle cx="10" cy="14" r="0.6" fill="white" stroke="none" />
+              </svg>
+            </span>
+            <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text font-mono text-sm font-semibold tracking-tight text-transparent">
+              EdgeCase
+            </span>
+          </div>
+
+          <nav className="flex items-center gap-6">
+            <a
+              href="#how-it-works"
+              className="hidden text-sm text-zinc-400 transition-colors hover:text-white sm:inline"
+            >
+              How it works
+            </a>
+            <button
+              type="button"
+              onClick={scrollToInput}
+              className="accent-gradient rounded-xl px-4 py-2 text-sm font-medium text-white shadow-lg shadow-indigo-500/25 transition-opacity hover:opacity-90"
+            >
+              Try it now
+            </button>
+          </nav>
         </div>
       </header>
 
-      <main className="mx-auto flex min-h-full w-full max-w-2xl flex-col px-4 py-12 sm:px-6">
-        <section className="flex flex-col gap-5 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-          <FeatureInput value={feature} onChange={setFeature} />
-
-          <button
-            type="button"
-            onClick={handleGenerate}
-            disabled={isLoading}
-            className="inline-flex items-center justify-center gap-2 self-start rounded-xl bg-blue-800 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-900 focus:ring-2 focus:ring-blue-300 focus:outline-none disabled:cursor-not-allowed disabled:bg-slate-300"
-          >
-            {isLoading ? (
-              "Generating…"
-            ) : (
-              <>
-                <svg
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="h-4 w-4"
-                  aria-hidden="true"
-                >
-                  <path d="M10 2a1 1 0 01.894.553l1.382 2.764 3.05.443a1 1 0 01.554 1.706l-2.207 2.152.521 3.037a1 1 0 01-1.451 1.054L10 12.347l-2.723 1.432a1 1 0 01-1.451-1.054l.52-3.037-2.206-2.152a1 1 0 01.554-1.706l3.05-.443L9.106 2.553A1 1 0 0110 2z" />
-                </svg>
-                Generate Edge Cases
-              </>
-            )}
-          </button>
-
-          {isLoading && <LoadingState />}
-          {error && !isLoading && <ErrorMessage message={error} />}
+      <main className="mx-auto flex w-full max-w-3xl flex-col px-4 pt-36 pb-24 sm:px-6">
+        <section className="text-center">
+          <h1 className="text-4xl font-semibold tracking-tight text-zinc-50 sm:text-5xl">
+            Ship Bulletproof Software.{" "}
+            <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+              Uncover Every Edge Case.
+            </span>
+          </h1>
+          <p className="mx-auto mt-4 max-w-xl text-base text-zinc-400 sm:text-lg">
+            Describe a software feature and get structured, prioritized edge
+            cases before you start building — powered by a local AI model.
+          </p>
         </section>
 
-        <section className="mt-12">
-          <h2 className="text-xl font-bold text-slate-900">What it does</h2>
-          <p className="mt-1 text-sm text-slate-500">
+        <section
+          id="feature-input"
+          className="relative mt-10 rounded-2xl border border-white/10 bg-zinc-900/90 p-4 shadow-2xl shadow-indigo-500/10 transition-all focus-within:border-indigo-500/50"
+        >
+          <FeatureInput value={feature} onChange={setFeature} />
+
+          <div className="mt-2 flex items-center justify-between border-t border-subtle pt-3">
+            <button
+              type="button"
+              onClick={handleGenerate}
+              disabled={isLoading}
+              className="accent-gradient flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-medium text-white shadow-lg shadow-indigo-500/25 transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {isLoading ? (
+                "Generating…"
+              ) : (
+                <>
+                  <svg
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    className="h-4 w-4"
+                    aria-hidden="true"
+                  >
+                    <path d="M10 2a1 1 0 01.894.553l1.382 2.764 3.05.443a1 1 0 01.554 1.706l-2.207 2.152.521 3.037a1 1 0 01-1.451 1.054L10 12.347l-2.723 1.432a1 1 0 01-1.451-1.054l.52-3.037-2.206-2.152a1 1 0 01.554-1.706l3.05-.443L9.106 2.553A1 1 0 0110 2z" />
+                  </svg>
+                  Generate Edge Cases
+                </>
+              )}
+            </button>
+
+            <span
+              className={`font-mono text-xs ${overLimit ? "text-red-400" : "text-zinc-500"}`}
+            >
+              {feature.length} / {MAX_FEATURE_LENGTH}
+            </span>
+          </div>
+        </section>
+
+        {isLoading && <LoadingState />}
+        {error && !isLoading && <ErrorMessage message={error} />}
+
+        <section id="how-it-works" className="mt-24 scroll-mt-28">
+          <h2 className="text-center text-2xl font-semibold tracking-tight text-zinc-50">
+            How it works
+          </h2>
+          <p className="mx-auto mt-2 max-w-md text-center text-sm text-zinc-500">
             From a feature description to a structured list of what could go
             wrong.
           </p>
 
-          <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {WHAT_IT_DOES.map((item) => (
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+            {HOW_IT_WORKS.map((item) => (
               <div
-                key={item.title}
-                className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
+                key={item.step}
+                className="rounded-2xl border border-white/10 bg-zinc-900/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/20"
               >
-                <span className="text-2xl" aria-hidden="true">
-                  {item.icon}
+                <span className="font-mono text-xs text-indigo-400">
+                  {item.step}
                 </span>
-                <h3 className="mt-2 text-sm font-semibold text-slate-900">
+                <div className="mt-2 text-2xl" aria-hidden="true">
+                  {item.icon}
+                </div>
+                <h3 className="mt-2 text-sm font-semibold tracking-tight text-zinc-100">
                   {item.title}
                 </h3>
-                <p className="mt-1 text-sm leading-6 text-slate-600">
+                <p className="mt-1 text-sm leading-6 text-zinc-400">
                   {item.body}
                 </p>
               </div>

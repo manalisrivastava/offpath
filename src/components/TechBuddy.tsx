@@ -10,17 +10,17 @@ export default function TechBuddy({ message }: { message: string }) {
       {open && (
         <div
           role="status"
-          className="relative max-w-[220px] rounded-2xl rounded-br-sm border border-blue-100 bg-white p-4 text-sm leading-6 text-slate-700 shadow-lg"
+          className="relative max-w-[220px] rounded-2xl rounded-br-sm border border-subtle bg-zinc-900/90 p-4 text-sm leading-6 text-zinc-300 shadow-2xl backdrop-blur-xl"
         >
           <button
             type="button"
             onClick={() => setOpen(false)}
             aria-label="Dismiss tip"
-            className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full border border-slate-200 bg-white text-xs text-slate-400 shadow-sm hover:text-slate-600"
+            className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full border border-subtle bg-zinc-900 text-xs text-zinc-500 shadow-sm hover:text-zinc-300"
           >
             ×
           </button>
-          <span className="mb-1 block text-xs font-semibold tracking-wide text-blue-800 uppercase">
+          <span className="mb-1 block font-mono text-xs font-semibold tracking-wide text-indigo-400 uppercase">
             Byte
           </span>
           {message}
@@ -31,7 +31,7 @@ export default function TechBuddy({ message }: { message: string }) {
         type="button"
         onClick={() => setOpen((value) => !value)}
         aria-label={open ? "Hide Byte the assistant" : "Show Byte's tips"}
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-800 text-2xl shadow-lg transition-transform hover:scale-105 hover:bg-blue-900 focus:ring-4 focus:ring-blue-200 focus:outline-none"
+        className="accent-gradient flex h-14 w-14 items-center justify-center rounded-full text-2xl shadow-lg shadow-indigo-500/25 transition-transform hover:scale-105 focus:ring-4 focus:ring-indigo-500/30 focus:outline-none"
       >
         🤖
       </button>

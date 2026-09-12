@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { generateEdgeCases } from "@/lib/ai/generateEdgeCases";
+import { MIN_FEATURE_LENGTH, MAX_FEATURE_LENGTH } from "@/lib/config/validation";
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -14,6 +15,23 @@ export async function POST(request: Request) {
   if (typeof feature !== "string" || feature.trim().length === 0) {
     return NextResponse.json(
       { error: "Please describe the feature in a little more detail." },
+      { status: 400 },
+    );
+  }
+
+  if (feature.trim().length < MIN_FEATURE_LENGTH) {
+    return NextResponse.json(
+      { error: "Please describe the feature in a little more detail." },
+      { status: 400 },
+    );
+  }
+
+  if (feature.length > MAX_FEATURE_LENGTH) {
+    return NextResponse.json(
+      {
+        error:
+          "Please shorten the feature description before generating edge cases.",
+      },
       { status: 400 },
     );
   }

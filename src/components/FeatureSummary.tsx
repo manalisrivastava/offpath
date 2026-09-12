@@ -1,19 +1,10 @@
-export default function FeatureSummary({
-  summary,
-  count,
-}: {
-  summary: string;
-  count: number;
-}) {
+export default function FeatureSummary({ summary }: { summary: string }) {
   return (
-    <div className="mb-6 rounded-xl border border-blue-100 bg-blue-50/60 p-5">
-      <h2 className="text-xs font-semibold tracking-wide text-blue-800 uppercase">
+    <div className="mb-6 rounded-xl border border-indigo-500/20 bg-indigo-950/30 p-5">
+      <h2 className="text-xs font-semibold tracking-wide text-indigo-300 uppercase">
         Feature understood as
       </h2>
-      <p className="mt-1 text-lg leading-7 text-slate-800">“{summary}”</p>
-      <p className="mt-3 text-sm font-medium text-blue-800">
-        {count} edge case{count === 1 ? "" : "s"} found
-      </p>
+      <p className="mt-1 text-lg leading-7 text-zinc-200">“{summary}”</p>
     </div>
   );
 }
