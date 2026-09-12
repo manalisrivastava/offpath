@@ -12,8 +12,7 @@ Generic AI chat tools can list these too, but the output is usually unstructured
 
 ## Screenshot
 
-> _Add a screenshot of the results page here, e.g. `docs/screenshot.png`, then reference it as:_
-> `![Results page showing categorized, severity-ranked edge cases](./docs/screenshot.png)`
+![Results page showing categorized, severity-ranked edge cases](./docs/screenshot.png)
 
 ## Features
 
