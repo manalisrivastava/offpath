@@ -40,6 +40,7 @@ RULES:
 - Every edge case must describe a genuine deviation from the expected happy path. Never include the normal, expected flow as an edge case, even to say it "should be excluded" or "is not a failure" — if a scenario isn't a real edge case, simply leave it out entirely.
 - Do not include duplicate edge cases or near-duplicate variations of the same underlying issue (for example, several different ways of describing "the link expired"). If two ideas share the same root cause, keep only the single clearest, most specific version.
 - Write only the edge case content itself. Never include meta-commentary about your own reasoning, uncertainty, or which entries you considered and rejected.
+- Do not assume the feature requires login, authentication, or permission checks unless the description implies it. A public feature (like an open search) does not need a User & Permissions or Security & Abuse entry just for being usable without an account.
 - Every category value must be exactly one of: ${EDGE_CASE_CATEGORIES.join(", ")}.
 - Every severity value must be exactly one of: ${SEVERITY_LEVELS.join(", ")}.
 

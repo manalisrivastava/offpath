@@ -16,9 +16,9 @@ export const LOCAL_AI_BASE_URL =
 export const LOCAL_AI_MODEL = process.env.LOCAL_AI_MODEL ?? "qwen3:4b";
 
 // A local model can be genuinely slow on CPU-only hardware — measured
-// 158-180+ seconds for a 4B model generating a full edge-case report
-// during testing, with real run-to-run variance. Timeout is set well
-// above that observed range so a slower run doesn't get cut off right
-// before finishing, but a request still shouldn't be allowed to hang
-// forever.
-export const LOCAL_AI_TIMEOUT_MS = 240_000;
+// 158-240+ seconds for a 4B model generating a full edge-case report
+// during testing, with real run-to-run variance wide enough that a
+// 240s cap itself got cut off once. Timeout is set with real headroom
+// above the observed range so a slower run doesn't lose completed work
+// right before finishing, but a request still shouldn't hang forever.
+export const LOCAL_AI_TIMEOUT_MS = 360_000;
