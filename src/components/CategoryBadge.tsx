@@ -6,7 +6,7 @@ export default function CategoryBadge({
   category: EdgeCaseCategory;
 }) {
   return (
-    <span className="inline-flex items-center rounded border border-slate-200 bg-slate-50 px-2 py-0.5 text-xs font-medium text-slate-600">
+    <span className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600">
       {category}
     </span>
   );

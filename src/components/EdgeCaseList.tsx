@@ -7,7 +7,7 @@ export default function EdgeCaseList({
   edgeCases: EdgeCase[];
 }) {
   return (
-    <ul className="flex flex-col gap-4">
+    <ul className="flex flex-col gap-5">
       {edgeCases.map((edgeCase) => (
         <li key={edgeCase.title}>
           <EdgeCaseCard edgeCase={edgeCase} />
