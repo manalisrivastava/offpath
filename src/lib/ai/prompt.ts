@@ -37,7 +37,9 @@ ${SEVERITY_GUIDANCE}
 RULES:
 - Return between 8 and 20 edge cases, preferring 10-15 for a feature of typical complexity.
 - Each edge case must be concrete and specific to this feature, not generic filler like "something may go wrong".
-- Do not include duplicate edge cases or trivial variations of the same issue.
+- Every edge case must describe a genuine deviation from the expected happy path. Never include the normal, expected flow as an edge case, even to say it "should be excluded" or "is not a failure" — if a scenario isn't a real edge case, simply leave it out entirely.
+- Do not include duplicate edge cases or near-duplicate variations of the same underlying issue (for example, several different ways of describing "the link expired"). If two ideas share the same root cause, keep only the single clearest, most specific version.
+- Write only the edge case content itself. Never include meta-commentary about your own reasoning, uncertainty, or which entries you considered and rejected.
 - Every category value must be exactly one of: ${EDGE_CASE_CATEGORIES.join(", ")}.
 - Every severity value must be exactly one of: ${SEVERITY_LEVELS.join(", ")}.
 
