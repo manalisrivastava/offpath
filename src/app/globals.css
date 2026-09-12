@@ -40,3 +40,48 @@ body {
   background-color: rgba(255, 255, 255, 0.15);
   border-radius: 9999px;
 }
+
+@keyframes drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(60px, 40px);
+  }
+}
+
+@keyframes drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-50px, -30px);
+  }
+}
+
+@keyframes shoot {
+  0% {
+    transform: translate(0, 0) rotate(-45deg);
+    opacity: 0;
+  }
+  2% {
+    opacity: 1;
+  }
+  15% {
+    transform: translate(320px, 320px) rotate(-45deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(320px, 320px) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-orb,
+  .shooting-star {
+    animation: none !important;
+  }
+}

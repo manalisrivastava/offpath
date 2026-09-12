@@ -5,7 +5,7 @@ import {
   fileUploadDemo,
 } from "@/data/demoResponses";
 
-// Demo mode doesn't run any real analysis — it just picks one of a few
+// Demo mode doesn't run any real analysis. It just picks one of a few
 // realistic canned responses based on keywords in the feature description,
 // so manual testing with different inputs still feels representative.
 export function getDemoResult(featureDescription: string): GenerationResult {

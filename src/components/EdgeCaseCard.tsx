@@ -25,8 +25,8 @@ export default function EdgeCaseCard({ edgeCase }: { edgeCase: EdgeCase }) {
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch {
-      // Clipboard access can be denied by the browser — silently no-op,
-      // the button simply won't show the "Copied" confirmation.
+      // Clipboard access can be denied by the browser, so this silently
+      // no-ops; the button simply won't show the "Copied" confirmation.
     }
   }
 

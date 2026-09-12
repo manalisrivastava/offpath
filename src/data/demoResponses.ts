@@ -139,7 +139,7 @@ export const shoppingCartDemo: GenerationResult = {
       category: "Input & Validation",
       severity: "Medium",
       whyItMatters:
-        "Accepting the order anyway leads to an order the store cannot fulfill.",
+        "Accepting the order anyway leads to an order the store cannot fulfil.",
     },
     {
       title: "Cart is edited in two browser tabs at once",
@@ -166,7 +166,7 @@ export const shoppingCartDemo: GenerationResult = {
       category: "External Integrations",
       severity: "Critical",
       whyItMatters:
-        "The customer may be charged without receiving an order, or the app may double-charge them on retry — a serious financial and trust issue.",
+        "The customer may be charged without receiving an order, or the app may double-charge them on retry, a serious financial and trust issue.",
     },
     {
       title: "Cart or price values are manipulated client-side",

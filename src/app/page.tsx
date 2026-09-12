@@ -14,7 +14,7 @@ const HOW_IT_WORKS = [
     step: "01",
     icon: "📝",
     title: "Describe",
-    body: "Paste a feature description, user story, or rough spec — plain English is enough.",
+    body: "Paste a feature description, user story, or rough spec. Plain English is enough.",
   },
   {
     step: "02",
@@ -26,7 +26,7 @@ const HOW_IT_WORKS = [
     step: "03",
     icon: "✅",
     title: "Review",
-    body: "Get categorized, severity-ranked edge cases, each with a clear reason why it matters.",
+    body: "Get categorised, severity-ranked edge cases, each with a clear reason why it matters.",
   },
 ];
 
@@ -46,12 +46,6 @@ export default function Home() {
       setFeature(stored.feature);
     }
   }, []);
-
-  function scrollToInput() {
-    document
-      .getElementById("feature-input")
-      ?.scrollIntoView({ behavior: "smooth", block: "center" });
-  }
 
   async function handleGenerate() {
     setError(null);
@@ -102,51 +96,7 @@ export default function Home() {
 
   return (
     <>
-      <header className="fixed top-4 left-1/2 z-50 w-[90%] max-w-7xl -translate-x-1/2 rounded-2xl border border-white/10 bg-zinc-900/80 px-6 py-3 backdrop-blur-md">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <span className="accent-gradient flex h-7 w-7 items-center justify-center rounded-lg">
-              <svg
-                viewBox="0 0 20 20"
-                fill="none"
-                stroke="white"
-                strokeWidth="1.8"
-                className="h-4 w-4"
-                aria-hidden="true"
-              >
-                <path
-                  d="M10 2 2 16h16L10 2Z"
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                />
-                <path d="M10 8v3.5" strokeLinecap="round" />
-                <circle cx="10" cy="14" r="0.6" fill="white" stroke="none" />
-              </svg>
-            </span>
-            <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text font-mono text-sm font-semibold tracking-tight text-transparent">
-              EdgeCase
-            </span>
-          </div>
-
-          <nav className="flex items-center gap-6">
-            <a
-              href="#how-it-works"
-              className="hidden text-sm text-zinc-400 transition-colors hover:text-white sm:inline"
-            >
-              How it works
-            </a>
-            <button
-              type="button"
-              onClick={scrollToInput}
-              className="accent-gradient rounded-xl px-4 py-2 text-sm font-medium text-white shadow-lg shadow-indigo-500/25 transition-opacity hover:opacity-90"
-            >
-              Try it now
-            </button>
-          </nav>
-        </div>
-      </header>
-
-      <main className="mx-auto flex w-full max-w-3xl flex-col px-4 pt-36 pb-24 sm:px-6">
+      <main className="mx-auto flex w-full max-w-3xl flex-col px-4 pt-16 pb-24 sm:px-6">
         <section className="text-center">
           <h1 className="text-4xl font-semibold tracking-tight text-zinc-50 sm:text-5xl">
             Ship Bulletproof Software.{" "}
@@ -155,8 +105,8 @@ export default function Home() {
             </span>
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-base text-zinc-400 sm:text-lg">
-            Describe a software feature and get structured, prioritized edge
-            cases before you start building — powered by a local AI model.
+            Describe a software feature and get structured, prioritised edge
+            cases before you start building, powered by a local AI model.
           </p>
         </section>
 
@@ -233,7 +183,7 @@ export default function Home() {
           </div>
         </section>
 
-        <TechBuddy message="Hi, I'm Byte 👋 Describe a feature above — mention user roles, timing, or outside services for richer edge cases." />
+        <TechBuddy message="Hi, I'm Byte 👋 Describe a feature above. Mention user roles, timing, or outside services for richer edge cases." />
       </main>
     </>
   );

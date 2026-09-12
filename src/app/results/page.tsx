@@ -49,7 +49,7 @@ export default function ResultsPage() {
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   // sessionStorage only exists in the browser, so this can only run after
-  // mount — not a derived/cascading update, just a one-time external read.
+  // mount. Not a derived/cascading update, just a one-time external read.
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setData(loadResult());
@@ -75,7 +75,7 @@ export default function ResultsPage() {
       setCopiedAll(true);
       setTimeout(() => setCopiedAll(false), 1500);
     } catch {
-      // Clipboard access can be denied by the browser — no-op.
+      // Clipboard access can be denied by the browser. No-op.
     }
   }
 
@@ -91,7 +91,7 @@ export default function ResultsPage() {
       try {
         await navigator.share({ title: "Edge Case Report", text });
       } catch {
-        // User cancelled the native share sheet — nothing to do.
+        // User cancelled the native share sheet. Nothing to do.
       }
       return;
     }
@@ -100,7 +100,7 @@ export default function ResultsPage() {
       setShared(true);
       setTimeout(() => setShared(false), 1500);
     } catch {
-      // Clipboard access can be denied by the browser — no-op.
+      // Clipboard access can be denied by the browser. No-op.
     }
   }
 
@@ -134,7 +134,7 @@ export default function ResultsPage() {
             Describe a feature
           </Link>
 
-          <TechBuddy message="Head back and describe a feature — I'll help you spot what's easy to miss." />
+          <TechBuddy message="Head back and describe a feature. I'll help you spot what's easy to miss." />
         </main>
       </>
     );
@@ -290,7 +290,7 @@ export default function ResultsPage() {
           <EdgeCaseList edgeCases={filteredEdgeCases} />
         </div>
 
-        <TechBuddy message="Nice! Skim the “Why this breaks production” notes first — that's where the real risk is explained." />
+        <TechBuddy message="Nice! Skim the “Why this breaks production” notes first. That's where the real risk is explained." />
       </main>
     </>
   );
