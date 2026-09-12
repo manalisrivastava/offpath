@@ -2,10 +2,10 @@ import { NextResponse } from "next/server";
 import { generateEdgeCases } from "@/lib/ai/generateEdgeCases";
 import { MIN_FEATURE_LENGTH, MAX_FEATURE_LENGTH } from "@/lib/config/validation";
 import {
-  OllamaConnectionError,
-  OllamaModelError,
-  OllamaTimeoutError,
-} from "@/lib/ai/ollamaErrors";
+  LocalAiConnectionError,
+  LocalAiModelError,
+  LocalAiTimeoutError,
+} from "@/lib/ai/localAiErrors";
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -47,17 +47,17 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Failed to generate edge cases:", error);
 
-    if (error instanceof OllamaConnectionError) {
+    if (error instanceof LocalAiConnectionError) {
       return NextResponse.json(
         {
           error:
-            "We couldn't connect to the local AI model. Make sure Ollama is running and try again.",
+            "We couldn't connect to the local AI model. Make sure it's running (e.g. Ollama or LM Studio) and try again.",
         },
         { status: 503 },
       );
     }
 
-    if (error instanceof OllamaTimeoutError) {
+    if (error instanceof LocalAiTimeoutError) {
       return NextResponse.json(
         {
           error:
@@ -67,7 +67,7 @@ export async function POST(request: Request) {
       );
     }
 
-    if (error instanceof OllamaModelError) {
+    if (error instanceof LocalAiModelError) {
       return NextResponse.json({ error: error.message }, { status: 503 });
     }
 

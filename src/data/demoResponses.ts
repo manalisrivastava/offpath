@@ -1,7 +1,7 @@
 import type { GenerationResult } from "@/types/edgeCase";
 
 // Predefined responses used in demo mode (AI_MODE=demo). They follow the
-// exact same shape a real Ollama response would, so the UI never needs to
+// exact same shape a real local AI response would, so the UI never needs to
 // know which provider produced the data.
 
 export const passwordResetDemo: GenerationResult = {

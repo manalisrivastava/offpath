@@ -1,6 +1,6 @@
 import { AI_MODE } from "@/lib/config/ai";
 import { getDemoResult } from "@/lib/ai/demoProvider";
-import { getOllamaResult } from "@/lib/ai/ollamaProvider";
+import { getLocalAiResult } from "@/lib/ai/localAiProvider";
 import { generationResultSchema } from "@/lib/schemas/edgeCase";
 import type { GenerationResult } from "@/types/edgeCase";
 
@@ -13,7 +13,7 @@ export async function generateEdgeCases(
   const raw: unknown =
     AI_MODE === "demo"
       ? getDemoResult(featureDescription)
-      : await getOllamaResult(featureDescription);
+      : await getLocalAiResult(featureDescription);
 
   const parsed = generationResultSchema.safeParse(raw);
 
