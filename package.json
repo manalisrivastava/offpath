@@ -1,6 +1,8 @@
 {
   "name": "edge-case-generator",
   "version": "0.1.0",
+  "description": "Find the edge cases your happy path missed — powered by a local AI model, no API keys, no cost.",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "next dev",
