@@ -26,8 +26,7 @@ export default function AnimatedBackground() {
           style={{
             top: star.top,
             left: star.left,
-            animation: `shoot ${star.duration} ease-in infinite`,
-            animationDelay: star.delay,
+            animation: `shoot ${star.duration} ease-in ${star.delay} infinite`,
           }}
         />
       ))}
