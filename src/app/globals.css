@@ -63,18 +63,18 @@ body {
 
 @keyframes shoot {
   0% {
-    transform: translate(0, 0) rotate(-45deg);
+    transform: translate(0, 0) rotate(45deg);
     opacity: 0;
   }
   2% {
     opacity: 1;
   }
-  15% {
-    transform: translate(320px, 320px) rotate(-45deg);
+  18% {
+    transform: translate(600px, 600px) rotate(45deg);
     opacity: 0;
   }
   100% {
-    transform: translate(320px, 320px) rotate(-45deg);
+    transform: translate(600px, 600px) rotate(45deg);
     opacity: 0;
   }
 }

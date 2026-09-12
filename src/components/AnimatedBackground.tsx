@@ -1,10 +1,7 @@
 const SHOOTING_STARS = [
-  { top: "8%", left: "15%", delay: "0s", duration: "7s" },
-  { top: "22%", left: "70%", delay: "1.6s", duration: "9s" },
-  { top: "55%", left: "5%", delay: "3.2s", duration: "8s" },
-  { top: "70%", left: "55%", delay: "5s", duration: "10s" },
-  { top: "12%", left: "88%", delay: "2.4s", duration: "7.5s" },
-  { top: "45%", left: "35%", delay: "6.2s", duration: "8.5s" },
+  { top: "8%", left: "10%", delay: "0s", duration: "8s" },
+  { top: "35%", left: "55%", delay: "3s", duration: "9s" },
+  { top: "15%", left: "75%", delay: "6s", duration: "10s" },
 ];
 
 export default function AnimatedBackground() {
@@ -25,7 +22,7 @@ export default function AnimatedBackground() {
       {SHOOTING_STARS.map((star, index) => (
         <span
           key={index}
-          className="shooting-star absolute h-px w-24 -rotate-45 rounded-full bg-gradient-to-r from-transparent via-white to-transparent"
+          className="shooting-star absolute h-px w-56 rounded-full bg-gradient-to-r from-transparent via-white to-transparent"
           style={{
             top: star.top,
             left: star.left,
