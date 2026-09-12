@@ -37,7 +37,7 @@ export default function LoadingState() {
     <p
       role="status"
       aria-live="polite"
-      className="mt-6 text-sm font-medium text-zinc-500"
+      className="mt-6 text-sm font-medium text-zinc-400"
     >
       {message}
     </p>

@@ -117,7 +117,7 @@ export default function Home() {
 
         <section
           id="feature-input"
-          className="relative mt-10 rounded-2xl border border-white/10 bg-zinc-900/90 p-4 shadow-2xl shadow-indigo-500/10 transition-all focus-within:border-indigo-500/50"
+          className="relative mt-10 rounded-2xl border border-white/10 bg-zinc-900/90 p-4 shadow-2xl shadow-indigo-500/10 transition-all focus-within:border-indigo-500/50 focus-within:ring-2 focus-within:ring-indigo-500/50"
         >
           <FeatureInput value={feature} onChange={setFeature} />
 
@@ -146,7 +146,7 @@ export default function Home() {
             </button>
 
             <span
-              className={`font-mono text-xs ${overLimit ? "text-red-400" : "text-zinc-500"}`}
+              className={`font-mono text-xs ${overLimit ? "text-red-400" : "text-zinc-400"}`}
             >
               {feature.length} / {MAX_FEATURE_LENGTH}
             </span>
@@ -160,7 +160,7 @@ export default function Home() {
           <h2 className="text-center text-2xl font-semibold tracking-tight text-zinc-50">
             How it works
           </h2>
-          <p className="mx-auto mt-2 max-w-md text-center text-sm text-zinc-500">
+          <p className="mx-auto mt-2 max-w-md text-center text-sm text-zinc-400">
             From a feature description to a structured list of what could go
             wrong.
           </p>

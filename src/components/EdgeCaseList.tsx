@@ -14,7 +14,7 @@ export default function EdgeCaseList({
 
   if (sortedEdgeCases.length === 0) {
     return (
-      <p className="rounded-2xl border border-subtle bg-zinc-900/40 p-8 text-center text-sm text-zinc-500">
+      <p className="rounded-2xl border border-subtle bg-zinc-900/40 p-8 text-center text-sm text-zinc-400">
         No edge cases match your current filters.
       </p>
     );

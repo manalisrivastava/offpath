@@ -47,7 +47,7 @@ export default function EdgeCaseCard({ edgeCase }: { edgeCase: EdgeCase }) {
           type="button"
           onClick={handleCopy}
           aria-label="Copy this edge case"
-          className="rounded-lg border border-subtle p-1.5 text-zinc-500 transition-colors hover:border-white/20 hover:text-zinc-200"
+          className="rounded-lg border border-subtle p-1.5 text-zinc-400 transition-colors hover:border-white/20 hover:text-zinc-200"
         >
           {copied ? (
             <span className="px-1 font-mono text-xs text-emerald-400">

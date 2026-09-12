@@ -220,7 +220,7 @@ export default function ResultsPage() {
         </div>
 
         <div className="mt-4 flex flex-wrap items-center gap-3">
-          <div className="relative min-w-[200px] flex-1">
+          <div className="relative w-full sm:min-w-[200px] sm:flex-1">
             <svg
               viewBox="0 0 20 20"
               fill="currentColor"
@@ -240,9 +240,9 @@ export default function ResultsPage() {
               onChange={(event) => setSearchQuery(event.target.value)}
               placeholder="Search edge cases…"
               aria-label="Search edge cases"
-              className="w-full rounded-lg border border-subtle bg-zinc-900/60 py-2 pr-14 pl-9 text-sm text-zinc-200 placeholder:text-zinc-500 focus:border-indigo-500/50 focus:outline-none"
+              className="w-full rounded-lg border border-subtle bg-zinc-900/60 py-2 pr-14 pl-9 text-sm text-zinc-200 placeholder:text-zinc-500 focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/50 focus:outline-none"
             />
-            <kbd className="absolute top-1/2 right-2 -translate-y-1/2 rounded border border-subtle bg-white/5 px-1.5 py-0.5 font-mono text-[10px] text-zinc-500">
+            <kbd className="absolute top-1/2 right-2 -translate-y-1/2 rounded border border-subtle bg-white/5 px-1.5 py-0.5 font-mono text-[10px] text-zinc-400">
               ⌘K
             </kbd>
           </div>
@@ -254,7 +254,7 @@ export default function ResultsPage() {
                 setSeverityFilter(event.target.value as Severity | "All")
               }
               aria-label="Filter by severity"
-              className="appearance-none rounded-lg border border-subtle bg-zinc-900/60 py-2 pr-8 pl-3 text-sm text-zinc-300 focus:border-indigo-500/50 focus:outline-none"
+              className="appearance-none rounded-lg border border-subtle bg-zinc-900/60 py-2 pr-8 pl-3 text-sm text-zinc-300 focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/50 focus:outline-none"
             >
               <option value="All">All severities</option>
               {SEVERITY_LEVELS.map((level) => (
@@ -274,7 +274,7 @@ export default function ResultsPage() {
                 )
               }
               aria-label="Filter by category"
-              className="appearance-none rounded-lg border border-subtle bg-zinc-900/60 py-2 pr-8 pl-3 text-sm text-zinc-300 focus:border-indigo-500/50 focus:outline-none"
+              className="appearance-none rounded-lg border border-subtle bg-zinc-900/60 py-2 pr-8 pl-3 text-sm text-zinc-300 focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/50 focus:outline-none"
             >
               <option value="All">All categories</option>
               {EDGE_CASE_CATEGORIES.map((category) => (

@@ -16,7 +16,7 @@ export default function TechBuddy({ message }: { message: string }) {
             type="button"
             onClick={() => setOpen(false)}
             aria-label="Dismiss tip"
-            className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full border border-subtle bg-zinc-900 text-xs text-zinc-500 shadow-sm hover:text-zinc-300"
+            className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full border border-subtle bg-zinc-900 text-xs text-zinc-400 shadow-sm hover:text-zinc-300"
           >
             ×
           </button>
