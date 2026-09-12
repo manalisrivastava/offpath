@@ -48,6 +48,11 @@ export default function Home() {
   }, []);
 
   async function handleGenerate() {
+    // Belt-and-suspenders against a double-submit: the button's `disabled`
+    // prop handles the normal case, but this guards the small window before
+    // React commits that state to the DOM (e.g. two clicks in the same tick).
+    if (isLoading) return;
+
     setError(null);
 
     const trimmed = feature.trim();

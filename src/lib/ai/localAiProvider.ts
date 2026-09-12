@@ -90,6 +90,13 @@ export async function getLocalAiResult(
   }
 
   if (!response.ok) {
+    // Ollama returns a 404 with a "not found" message for a model that
+    // hasn't been pulled, which this catches correctly. LM Studio behaves
+    // differently: tested directly, it doesn't validate the requested
+    // model name at all and just answers with whatever model is already
+    // loaded, so this branch won't fire for a typo'd LOCAL_AI_MODEL there.
+    // That's a difference in the local tool itself, not something this
+    // app can detect around.
     const bodyText = await response.text().catch(() => "");
     if (
       response.status === 404 ||
