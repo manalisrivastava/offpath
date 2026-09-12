@@ -1,5 +1,6 @@
 import { AI_MODE } from "@/lib/config/ai";
 import { getDemoResult } from "@/lib/ai/demoProvider";
+import { getOllamaResult } from "@/lib/ai/ollamaProvider";
 import { generationResultSchema } from "@/lib/schemas/edgeCase";
 import type { GenerationResult } from "@/types/edgeCase";
 
@@ -9,15 +10,10 @@ import type { GenerationResult } from "@/types/edgeCase";
 export async function generateEdgeCases(
   featureDescription: string,
 ): Promise<GenerationResult> {
-  let raw: unknown;
-
-  if (AI_MODE === "demo") {
-    raw = getDemoResult(featureDescription);
-  } else {
-    throw new Error(
-      "Ollama mode is not implemented yet. Set AI_MODE=demo in .env.local.",
-    );
-  }
+  const raw: unknown =
+    AI_MODE === "demo"
+      ? getDemoResult(featureDescription)
+      : await getOllamaResult(featureDescription);
 
   const parsed = generationResultSchema.safeParse(raw);
 
