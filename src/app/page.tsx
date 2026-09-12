@@ -4,56 +4,48 @@ import { useState } from "react";
 import FeatureInput from "@/components/FeatureInput";
 import FeatureSummary from "@/components/FeatureSummary";
 import EdgeCaseList from "@/components/EdgeCaseList";
+import LoadingState from "@/components/LoadingState";
+import ErrorMessage from "@/components/ErrorMessage";
 import type { GenerationResult } from "@/types/edgeCase";
-
-// Hardcoded stand-in for a real AI response, used only to prove the UI
-// works before any backend or AI logic exists (Development Stage 1).
-const SAMPLE_RESULT: GenerationResult = {
-  featureSummary:
-    "Users can reset their password using an email-based reset link.",
-  edgeCases: [
-    {
-      title: "Multiple password-reset requests",
-      description:
-        "The user requests several password-reset emails before using any of the links.",
-      category: "Time & Concurrency",
-      severity: "High",
-      whyItMatters:
-        "Older and newer reset links may behave inconsistently unless token behaviour is clearly defined.",
-    },
-    {
-      title: "Reset link used after expiry",
-      description:
-        "The user clicks the reset link after the 30-minute expiry window has passed.",
-      category: "State & Workflow",
-      severity: "Medium",
-      whyItMatters:
-        "Without a clear expired-link message, the user may think the application is broken.",
-    },
-    {
-      title: "Reset requested for a nonexistent email",
-      description:
-        "The user submits an email address that has no matching account.",
-      category: "Security & Abuse",
-      severity: "Medium",
-      whyItMatters:
-        "Revealing whether an email exists in the system can leak account information to attackers.",
-    },
-    {
-      title: "Reset link reused after password is changed",
-      description:
-        "The user clicks the same reset link a second time after already setting a new password.",
-      category: "Input & Validation",
-      severity: "Low",
-      whyItMatters:
-        "A reusable link could let someone silently overwrite a password again later.",
-    },
-  ],
-};
 
 export default function Home() {
   const [feature, setFeature] = useState("");
-  const [showResults, setShowResults] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [result, setResult] = useState<GenerationResult | null>(null);
+
+  async function handleGenerate() {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ feature }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(
+          data.error ??
+            "Something went wrong while generating edge cases. Please try again.",
+        );
+        setResult(null);
+        return;
+      }
+
+      setResult(data);
+    } catch {
+      setError(
+        "Something went wrong while generating edge cases. Please try again.",
+      );
+      setResult(null);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   return (
     <main className="mx-auto flex min-h-full w-full max-w-3xl flex-col px-4 py-12 sm:px-6">
@@ -74,20 +66,24 @@ export default function Home() {
         <FeatureInput value={feature} onChange={setFeature} />
         <button
           type="button"
-          onClick={() => setShowResults(true)}
-          className="self-start rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-slate-700 focus:ring-2 focus:ring-slate-400 focus:outline-none"
+          onClick={handleGenerate}
+          disabled={isLoading}
+          className="self-start rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-slate-700 focus:ring-2 focus:ring-slate-400 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60"
         >
-          Generate Edge Cases
+          {isLoading ? "Generating…" : "Generate Edge Cases"}
         </button>
       </section>
 
-      {showResults && (
+      {isLoading && <LoadingState />}
+      {error && !isLoading && <ErrorMessage message={error} />}
+
+      {result && !isLoading && !error && (
         <section className="mt-10">
           <FeatureSummary
-            summary={SAMPLE_RESULT.featureSummary}
-            count={SAMPLE_RESULT.edgeCases.length}
+            summary={result.featureSummary}
+            count={result.edgeCases.length}
           />
-          <EdgeCaseList edgeCases={SAMPLE_RESULT.edgeCases} />
+          <EdgeCaseList edgeCases={result.edgeCases} />
         </section>
       )}
     </main>
