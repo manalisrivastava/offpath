@@ -114,7 +114,7 @@ export default function ResultsPage() {
         <header className="border-b border-subtle bg-zinc-950/80 backdrop-blur-xl">
           <div className="mx-auto max-w-3xl px-4 py-4 sm:px-6">
             <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text font-mono text-sm font-semibold text-transparent">
-              EdgeCase
+              Offpath
             </span>
           </div>
         </header>

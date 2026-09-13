@@ -15,7 +15,7 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Edge Case Generator",
+  title: "Offpath",
   description: "Find the edge cases your happy path missed.",
 };
 

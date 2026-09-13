@@ -1,4 +1,4 @@
-# Edge Case Generator
+# Offpath
 
 Find the edge cases your happy path missed.
 
@@ -72,7 +72,7 @@ The browser never talks to the local AI server directly, every request goes thro
 
 ```bash
 git clone <your-repo-url>
-cd edge-case-generator
+cd offpath
 npm install
 ```
 

@@ -1,7 +1,7 @@
 {
-  "name": "edge-case-generator",
+  "name": "offpath",
   "version": "0.1.0",
-  "description": "Find the edge cases your happy path missed — powered by a local AI model, no API keys, no cost.",
+  "description": "Offpath: find the edge cases your happy path missed. Powered by a local AI model, no API keys, no cost.",
   "license": "MIT",
   "private": true,
   "scripts": {
